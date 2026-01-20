@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\DocBlock\Tags\Factory\ReturnFactory;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        return Category::all();
+        return view('categories.index', [
+            'categories' => Category::latest()->paginate(10)
+        ]);
+    }
+
+    public function create()
+    {
+        return view('categories.create');
     }
 
     public function store(Request $request)
@@ -18,13 +24,20 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|string|max:100'
         ]);
+
+        Category::create([
+            'name' => $request->name
+        ]);
+
+        return redirect()
+            ->route('categories.index')
+            ->with('success', 'Kategori berhasil ditambahkan');
     }
 
-    public function show(Category $category)
+    public function edit(Category $category)
     {
-        return $category;
+        return view('categories.edit', compact('category'));
     }
-
 
     public function update(Request $request, Category $category)
     {
@@ -32,17 +45,21 @@ class CategoryController extends Controller
             'name' => 'required|string|max:100'
         ]);
 
-        $category->update($request->only('name'));
+        $category->update([
+            'name' => $request->name
+        ]);
 
-        return $category;
+        return redirect()
+            ->route('categories.index')
+            ->with('success', 'Kategori berhasil diperbarui');
     }
 
     public function destroy(Category $category)
     {
         $category->delete();
 
-        return response()->json([
-            'message' => 'Kategori berhasil dihapus'
-        ]);
+        return redirect()
+            ->route('categories.index')
+            ->with('success', 'Kategori berhasil dihapus');
     }
 }

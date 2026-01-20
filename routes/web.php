@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\AspirationController;
 use App\Http\Controllers\AspirationFeedbackController;
 use App\Http\Controllers\CategoryController;
@@ -72,5 +73,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::resource('categories', CategoryController::class);
+
+    Route::get('/admin/students', [StudentController::class, 'index'])
+        ->name('admin.students.index');
 
 });
