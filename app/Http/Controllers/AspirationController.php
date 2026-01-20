@@ -13,13 +13,17 @@ class AspirationController extends Controller
         $user = Auth::user();
 
         if ($user->isAdmin()) {
-            return Aspiration::with(['user', 'category'])->latest()->get();
+            $aspirations = Aspiration::with(['user', 'category'])
+                ->latest()
+                ->get();
+        } else {
+            $aspirations = Aspiration::with('category')
+                ->where('user_id', $user->id)
+                ->latest()
+                ->get();
         }
 
-        return Aspiration::with('category')
-            ->where('user_id', $user->id)
-            ->latest()
-            ->get();
+        return view('aspirations.index', compact('aspirations'));
     }
 
     public function store(Request $request)
@@ -30,21 +34,31 @@ class AspirationController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        return Aspiration::create([
+        Aspiration::create([
             'user_id'     => Auth::id(),
             'category_id' => $request->category_id,
             'title'       => $request->title,
             'description' => $request->description,
+            'status'      => 'Terkirim'
         ]);
+
+        return redirect()
+            ->route('aspirations.index')
+            ->with('success', 'Aspirasi berhasil dikirim');
+
     }
 
     public function show(Aspiration $aspiration)
     {
-        return $aspiration->load(['user', 'category', 'feedbacks']);
+        return view('aspirations.show', compact('aspiration'));
     }
 
     public function update(Request $request, Aspiration $aspiration)
     {
+        if (!Auth::user()->isAdmin()) {
+            abort(403);
+        }
+
         $request->validate([
             'status' => 'required|in:Terkirim,Diproses,Dalam Perbaikan,Selesai'
         ]);
@@ -58,10 +72,18 @@ class AspirationController extends Controller
 
     public function destroy(Aspiration $aspiration)
     {
+        $user = Auth::user();
+
+        if (! $aspiration->canBeDeletedBy($user)) {
+            return redirect()
+                ->route('aspirations.index')
+                ->with('error', 'Aspirasi tidak dapat dihapus');
+        }
+
         $aspiration->delete();
 
-        return response()->json([
-            'message' => 'Aspirasi dihapus'
-        ]);
+        return redirect()
+            ->route('aspirations.index')
+            ->with('success', 'Aspirasi berhasil dihapus');
     }
 }

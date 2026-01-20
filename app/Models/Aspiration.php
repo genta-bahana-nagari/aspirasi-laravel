@@ -28,4 +28,14 @@ class Aspiration extends Model
     {
         return $this->hasMany(AspirationFeedback::class);
     }
+
+    public function canBeDeletedBy($user)
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        return $this->user_id === $user->id
+            && $this->status === 'Terkirim';
+    }
 }
