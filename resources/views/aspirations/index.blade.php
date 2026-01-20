@@ -69,28 +69,31 @@
                             </td>
                             <td>{{ $aspiration->created_at->format('d-m-Y') }}</td>
                             <td class="text-center">
-                                <a href="{{ route('aspirations.show', $aspiration->id) }}"
-                                   class="btn btn-sm btn-info">
+                                <a href="{{ route('aspirations.show', $aspiration->id) }}" class="btn btn-sm btn-info">
                                     Detail
                                 </a>
 
+                                {{-- Edit untuk student (status Terkirim) --}}
+                                @if(auth()->user()->role === 'student' && $aspiration->user_id === auth()->id() && $aspiration->status === 'Terkirim')
+                                    <a href="{{ route('aspirations.edit', $aspiration->id) }}" class="btn btn-sm btn-warning">
+                                        Edit
+                                    </a>
+                                @endif
+
+                                {{-- Edit untuk admin --}}
                                 @if(auth()->user()->isAdmin())
-                                    <a href="{{ route('aspirations.edit', $aspiration->id) }}"
-                                       class="btn btn-sm btn-warning">
+                                    <a href="{{ route('aspirations.edit', $aspiration->id) }}" class="btn btn-sm btn-warning">
                                         Ubah Status
                                     </a>
                                 @endif
 
                                 @if($aspiration->canBeDeletedBy(auth()->user()))
-                                    <form action="{{ route('aspirations.destroy', $aspiration->id) }}"
-                                        method="POST"
-                                        class="d-inline"
+                                    <form action="{{ route('aspirations.destroy', $aspiration->id) }}" method="POST" class="d-inline"
                                         onsubmit="return confirm('Yakin ingin menghapus aspirasi ini?')">
                                         @csrf
                                         @method('DELETE')
-
                                         <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="bi bi-trash"></i>
+                                            <i class="bi bi-trash"></i> Hapus
                                         </button>
                                     </form>
                                 @endif
