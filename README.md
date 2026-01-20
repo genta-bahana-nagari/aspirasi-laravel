@@ -1,59 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Aspirasi Siswa - Laravel
 
-## About Laravel
+## 📌 Deskripsi Proyek
+**Aspirasi Siswa** adalah aplikasi berbasis web yang digunakan untuk menampung, mengelola, dan menindaklanjuti pengaduan atau aspirasi siswa terkait sarana dan prasarana sekolah.  
+Aplikasi ini bertujuan untuk meningkatkan transparansi, efektivitas, dan komunikasi antara siswa dan pihak sekolah.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Catatan:
+- *Proyek ini hanya untuk mentoring, namun anda juga boleh mencobanya sendiri.*
+- *Jangan hiraukan branch development. Cukup main saja.*
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🎯 Tujuan
+- Menyediakan media resmi pengaduan siswa
+- Mempermudah pihak sekolah dalam mengelola laporan
+- Meningkatkan kualitas sarana dan prasarana sekolah
+- Mencatat status tindak lanjut pengaduan secara sistematis
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 🧩 Fitur Utama
+- 🔐 Autentikasi pengguna (Login & Register)
+- 📝 Pengajuan pengaduan/aspirasi
+- 🗂️ Kategori pengaduan
+- 📊 Status pengaduan:
+  - Terkirim
+  - Diproses
+  - Dalam Perbaikan
+  - Selesai
+- 👤 Manajemen sesi pengguna
+- 🚪 Logout sistem
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🛠️ Teknologi yang Digunakan
+- **Frontend**: Blade, Bootstrap
+- **Backend**: PHP (Laravel 12)
+- **Database**: MySQL / MariaDB
+- **Web Server**: Apache (XAMPP / Laragon)
+- **Version Control**: Git
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Catatan:
+- *Kali ini tidak harus di folder C:\laragon\www\aspirasi-siswa. Bebas ditaruh folder mana saja. Karena nanti, kita pakai perintah artisan serve untuk menyalakan servernya. Laragon hanya untuk database saja.*
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
 
-## Contributing
+## Persyaratan (PENTING DAN WAJIB DIINSTALL)
+- [Git](https://git-scm.com/)
+- [Composer](https://getcomposer.org/)
+- [PHP](https://www.php.net/)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Step by step ada [disini](https://docs.google.com/document/d/1okyLDBd0aWZotveCJ9VHdl0vnv97R1NEXFlvSckl81Q/edit?usp=sharing)
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Instalasi Proyek
 
-## Security Vulnerabilities
+1. **Clone repository ini:**
+   ```bash
+   git clone https://github.com/genta-bahana-nagari/aspirasi-siswa.git
+   cd aspirasi-siswa
+   ```
+   *Jalankan perintah ini di CMD. Folder (direktorinya) bebas mau dimana.*
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+2. **Install Dependensi Laravel:**
+   ```bash
+   composer install
+   ```
 
-## License
+3. **Copy Paste File Environment :**   
+   *Copy file .env.example, paste dan rename jadi .env*
+   *Ctrl+C dan Ctrl+V biasa di VSCode (pastikan buka VSCode). Nanti ubah bagian ini*:
+   ```bash
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=buat_database_mu_sendiri!!!
+   DB_USERNAME=root
+   DB_PASSWORD=sesuaikan_password_root
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. **Migrasi Tabel dan Buat Key:**
+*Oh iya, sekalian jalankan seeder. Karena user admin ini tidak bisa register lewat webnya.*
+   ```bash
+   php artisan migrate
+   php artisan db:seed --class=AdminSeeder ==> Seeder
+   php artisan key:generate
+   ```
+
+5. **Jalankan Local Server:**
+   ```bash
+   php artisan serve
+   ```
