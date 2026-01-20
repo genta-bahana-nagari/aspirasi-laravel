@@ -69,7 +69,7 @@
 <div class="d-flex">
     <!-- Sidebar -->
     <nav class="sidebar text-white p-3">
-        <h5 class="mb-4 text-center">Aspirasi App</h5>
+        <h5 class="mb-4 text-center">Aspirasi Sekolah</h5>
 
         <ul class="nav flex-column">
             <li class="nav-item">
