@@ -7,8 +7,14 @@
 
     {{-- Header --}}
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h4 mb-0">Daftar Aspirasi</h1>
-
+        <div>
+            <h1 class="h4 mb-1">Daftar Aspirasi</h1>
+            @if(auth()->user()->role === 'student')
+                <p class="text-muted mb-0">Suarakan aspirasimu di sini</p>
+            @else
+                <p class="text-muted mb-0">Kelola aspirasi siswa di sini</p>
+            @endif
+        </div>
         @if(auth()->user()->role === 'student')
             <a href="{{ route('aspirations.create') }}" class="btn btn-primary">
                 + Kirim Aspirasi

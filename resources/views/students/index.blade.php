@@ -3,7 +3,7 @@
 @section('title', 'Data Siswa')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid py-4">
 
     <div class="mb-4">
         <h1 class="h4">Data Siswa</h1>
